@@ -8,9 +8,10 @@ deposit_percentage = .25
 down_payment = house_cost * deposit_percentage
 num_months = 36
 current_savings = 0
+decimal_accuracy = 10000
 num_steps = 0
 low = 0
-high = 10000
+high = decimal_accuracy
 
 # check to see if it is possible to save value at all to avoid binary search
 for month in range(num_months):
@@ -29,7 +30,7 @@ if(current_savings >= down_payment - 100 and current_savings <= down_payment + 1
     exit()
 
 guess = int((high + low) / 2)
-portion_saved = guess / 10000
+portion_saved = guess / decimal_accuracy
 
 while(low != guess):
     num_steps += 1
@@ -53,10 +54,10 @@ while(low != guess):
         high = guess
 
     guess = int((high + low) / 2)
-    portion_saved = guess / 10000
+    portion_saved = guess / decimal_accuracy
 
-# this takes care of a salary so large that the guesses are not accurate
+# this takes care of salaries so large that the guesses are not accurate
 # enough to result in savings +/-£100 of the down payment
-print(f"Best savings rate: ~{((guess + .5) / 1000)}%")
+print(f"Best savings rate: ~{(guess / (decimal_accuracy)) * 10}%")
 print(f"Steps in bisection search: {num_steps}")
 exit()
