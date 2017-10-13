@@ -1,4 +1,4 @@
-starting_salary = float(input("Enter the starting salary: "))
+starting_salary = float(input("Enter the starting salary: £"))
 
 current_salary = starting_salary
 semi_annual_raise = .07
@@ -22,17 +22,19 @@ for month in range(num_months):
 if(current_savings < down_payment - 100):
     print("It is not possible to pay the down payment in three years")
     exit()
-elif(current_savings >= down_payment - 100 and current_savings <= down_payment + 100):
-    print(f"Percentage saved: 100%\ncurrent_savings: {current_savings}")
+
+if(current_savings >= down_payment - 100 and current_savings <= down_payment + 100):
+    print(f"Best savings rate: 100%\ncurrent_savings: {current_savings}")
     print(f"Steps in bisection search: {num_steps}")
     exit()
 
-while(high > low):
+guess = int((high + low) / 2)
+portion_saved = guess / 10000
+
+while(low != guess):
     num_steps += 1
     current_salary = starting_salary
     current_savings = 0
-    guess = int((high + low) / 2)
-    portion_saved = guess / 10000
 
     for month in range(num_months):
         current_savings += current_savings * annual_return / 12
@@ -41,10 +43,20 @@ while(high > low):
             current_salary += current_salary * semi_annual_raise
 
     if(current_savings >= down_payment - 100 and current_savings <= down_payment + 100):
-        print(f"Percentage saved: {portion_saved * 10}%\ncurrent_savings: {current_savings}")
+        print(f"Best savings rate: {portion_saved * 10}%")
         print(f"Steps in bisection search: {num_steps}")
         exit()
-    elif(current_savings < down_payment - 100):
+
+    if(current_savings < down_payment - 100):
         low = guess
     else:
         high = guess
+
+    guess = int((high + low) / 2)
+    portion_saved = guess / 10000
+
+# this takes care of a salary so large that the guesses are not accurate
+# enough to result in savings +/-£100 of the down payment
+print(f"Best savings rate: ~{((guess + .5) / 1000)}%")
+print(f"Steps in bisection search: {num_steps}")
+exit()
