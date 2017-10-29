@@ -14,5 +14,4 @@ def numberGuess():
 
     print(f"Correct! The number is {number}")
 
-
 numberGuess()
