@@ -42,7 +42,6 @@ def choose_word(wordlist):
 # so that it can be accessed from anywhere in the program
 wordlist = load_words()
 
-
 def is_word_guessed(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing; assumes all letters are
@@ -53,11 +52,10 @@ def is_word_guessed(secret_word, letters_guessed):
       False otherwise
     '''
     for c in secret_word:
-    	if c not in letters_guessed:
-    		return False
-
-	else:
-		return True
+        if c not in letters_guessed:
+                return False
+    else:
+        return True
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -69,12 +67,12 @@ def get_guessed_word(secret_word, letters_guessed):
     guessed_word = []
 
     for c in secret_word:
-    	if c in letters_guessed:
-    		guessed_word.append(c)
-		else:
-			guessed_word.append("_ ")
+        if c in letters_guessed:
+            guessed_word.append(c)
+        else:
+            guessed_word.append("_ ")
 
-	return guessed_word
+    return "".join(guessed_word)
 
 def get_available_letters(letters_guessed):
     '''
@@ -82,14 +80,13 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
     available_letters = []
 
     for c in string.ascii_lowercase:
-		if c not in letters_guessed:
-			available_letters.append(c)
+        if c not in letters_guessed:
+            available_letters.append(c)
 
-	return "".join(available_letters)
+    return "".join(available_letters)
 
 def hangman(secret_word):
     '''
@@ -116,8 +113,28 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    letters_guessed = []
+    guesses_remaining = 6
+    warnings_remaining = 3
+
+    print("Welcome to the game Hangman!")
+    print(f"I am thinking of a word that is {len(secret_word)} letters long.")
+
+    while guesses_remaining > 0:
+        print("*******")
+        print(f"You have {warnings_remaining} warnings left.")
+        print(f"You have {guesses_remaining} guesses left.")
+        print(f"Available letters: {get_available_letters(letters_guessed)}")
+        current_guess = input("Please guess a letter: ").lower()
+        if not str.isalpha(current_guess):
+            if warnings_remaining > 0:
+                warnings_remaining -= 1
+                print(f"Oops! That is not a valid letter. You have {warnings_remaining} warnings left.")
+                print(f"{get_guessed_word(secret_word, letters_guessed)}")
+            elif guesses_remaining > 1:
+                guesses_remaining -= 1
+                print(f"Oops! That is not a valid letter. You have {guesses_remaining} guesses left.")
+                print(f"{get_guessed_word(secret_word, letters_guessed)}")
 
 secret_word = choose_word(wordlist)
 hangman(secret_word)
