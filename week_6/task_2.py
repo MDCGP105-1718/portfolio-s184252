@@ -71,10 +71,18 @@ def find_words_frequency_at_least(word_dict, minimum_freq):
 	return word_frequency_results
 
 lyrics1 = open(LYRICS1_FILENAME, 'r').read()
-most_freq_words = (find_most_frequent_words(create_freq_dict(lyrics1)))
+most_freq_words = find_most_frequent_words(create_freq_dict(lyrics1))
 
+print(f"Most Frequent - [{most_freq_words[1]} occurances]")
 for n in most_freq_words[0]:
 	print(n)
 
+print()
+
 lyrics2 = open(LYRICS2_FILENAME, 'r').read()
-print(find_words_frequency_at_least(create_freq_dict(lyrics2), 3))
+frequency_at_least_results = find_words_frequency_at_least(create_freq_dict(lyrics2), 3)
+
+for tup in frequency_at_least_results:
+	print(f"Frequency: [{tup[1]} occurances]")
+	for word in tup[0]:
+		print(word)
