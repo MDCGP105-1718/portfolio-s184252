@@ -129,12 +129,33 @@ def hangman(secret_word):
         if not str.isalpha(current_guess):
             if warnings_remaining > 0:
                 warnings_remaining -= 1
-                print(f"Oops! That is not a valid letter. You have {warnings_remaining} warnings left.")
+                print(f"Oops! That is not a valid letter. You used up a warning.")
                 print(f"{get_guessed_word(secret_word, letters_guessed)}")
             elif guesses_remaining > 1:
                 guesses_remaining -= 1
-                print(f"Oops! That is not a valid letter. You have {guesses_remaining} guesses left.")
+                print(f"Oops! That is not a valid letter. You used up a guess.")
                 print(f"{get_guessed_word(secret_word, letters_guessed)}")
+        elif current_guess in letters_guessed:
+            if warnings_remaining > 0:
+                warnings_remaining -= 1
+                print(f"Oops! You've already guessed that letter. You used up a warning.")
+                print(f"{get_guessed_word(secret_word, letters_guessed)}")
+            elif guesses_remaining > 1:
+                guesses_remaining -= 1
+                print(f"Oops! You've already guessed that letter. You used up a guess.")
+                print(f"{get_guessed_word(secret_word, letters_guessed)}")
+        elif current_guess in secret_word:
+            letters_guessed.append(current_guess)
+            print("Good guess!")
+            print(f"{get_guessed_word(secret_word, letters_guessed)}")
+        else:
+            if current_guess in 'aeiou':
+                guesses_remaining -= 2
+            else:
+                guesses_remaining -= 1
+            letters_guessed.append(current_guess)
+            print("Oops! That letter is not in my word.")
+
 
 secret_word = choose_word(wordlist)
 hangman(secret_word)
