@@ -145,6 +145,7 @@ def hangman(secret_word):
                 print(f"Oops! That is not a valid letter. You used up a warning.")
             else:
                 guesses_remaining -= 1
+                warnings_remaining = 3
                 print(f"Oops! That is not a valid letter. You used up a guess.")
         elif current_guess in letters_guessed:
             if warnings_remaining > 0:
@@ -152,6 +153,7 @@ def hangman(secret_word):
                 print(f"Oops! You've already guessed that letter. You used up a warning.")
             else:
                 guesses_remaining -= 1
+                warnings_remaining = 3
                 print(f"Oops! You've already guessed that letter. You used up a guess.")
         elif current_guess in secret_word:
             letters_guessed.append(current_guess)
