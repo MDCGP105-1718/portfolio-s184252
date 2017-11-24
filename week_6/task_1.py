@@ -22,4 +22,4 @@ for n in range(20):
 
 print("\nMemoization implementation:")
 for n in range(2000):
-	print(f"fib[{n}]: {fib_mem(n)}")
+    print(f"fib[{n}]: {fib_mem(n)}")
