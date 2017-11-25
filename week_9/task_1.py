@@ -20,33 +20,33 @@ class Card(object):
         return self.value + " of " + self.suit
 
 class Deck(object):
+    suits = [
+        'Spades',
+        'Hearts',
+        'Clubs',
+        'Diamonds'
+    ]
+
+    values = [
+        'Ace',
+        'Two',
+        'Three',
+        'Four',
+        'Five',
+        'Six',
+        'Seven',
+        'Eight',
+        'Nine',
+        'Ten',
+        'Jack',
+        'Queen',
+        'King'
+    ]
+    
     def __init__(self):
-        card_suits = [
-            'Spades',
-            'Hearts',
-            'Clubs',
-            'Diamonds'
-        ]
-
-        card_values = [
-            'Ace',
-            'Two',
-            'Three',
-            'Four',
-            'Five',
-            'Six',
-            'Seven',
-            'Eight',
-            'Nine',
-            'Ten',
-            'Jack',
-            'Queen',
-            'King'
-        ]
-
         self.cards = []
         for n in range(0, 52):
-            self.cards.append(Card(card_suits[n // 13], card_values[n % 13]))
+            self.cards.append(Card(self.suits[n // 13], self.values[n % 13]))
 
     def __str__(self):
         deck_string = []
