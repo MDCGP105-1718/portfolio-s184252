@@ -12,5 +12,6 @@ print(f"You are {age} years old at the moment", end='')
 # Trying ternary operator
 print(" grandad!") if(age > 30) else print(".")
 print(f"You are {height}cm tall, and weigh {weight}kg.", end='')
-print(".. I'd slow down on the chips if I were you.") if(weight > 40) print()
+if(weight > 40):
+    print(".. I'd slow down on the chips if I were you.")
 print(f"Your eyes are {eye_colour} and your hair is {hair_colour}.")
